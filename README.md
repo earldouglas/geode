@@ -26,7 +26,7 @@ $ nix-build
 Then run the compiled binary:
 
 ```
-$ GEOIP_DB=GeoLite2-City.mmdb ./result/bin/geode
+$ GEOIP_DB=GeoLite2-City.mmdb PORT=3000 ./result/bin/geode
 Running geode...
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 ```
@@ -43,7 +43,7 @@ $ cabal install -j --only-dependencies
 Then run with Cabal:
 
 ```
-$ GEOIP_DB=GeoLite2-City.mmdb cabal run
+$ GEOIP_DB=GeoLite2-City.mmdb PORT=3000 cabal run
 Running geode...
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 ```
