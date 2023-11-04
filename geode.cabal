@@ -1,18 +1,20 @@
 name:                geode
-synopsis:            Udacity's GeoIP location service
+synopsis:            A simple IP geolocation service
 description:
-  Geode is a simple web service that returns geographical information about an IP using MaxMind's GeoIP2 City database.
+  Geode is a simple web service that returns geographical information
+  about an IP address using MaxMind's GeoIP2 City database.
   .
-  Geode can look up a specific IP or the IP associated with the request. In the latter case, it honors Berlioz's
-  X-Forwarded-For header if present.
+  Geode can look up a given IP address or the IP address associated with
+  the request.  In the latter case, it honors the X-Forwarded-For header
+  if present.
   .
   See the readme in the Git repository for more details.
-homepage:            https://github.com/udacity/geode
-version:             0.1.0.2
+homepage:            https://github.com/earldouglas/geode
+version:             0
 license:             ISC
 license-file:        LICENSE
 author:              James Earl Douglas
-maintainer:          owen@udacity.com
+maintainer:          james@earldouglas.com
 category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
