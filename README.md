@@ -13,22 +13,42 @@ $ curl -s http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.
   gunzip > GeoLite2-City.mmdb
 ```
 
-Prep Cabal for building/running Geode:
+## Build and Run
+
+### Using Nix
+
+To use Nix, first build:
+
+```
+$ nix-build
+```
+
+Then run the compiled binary:
+
+```
+$ GEOIP_DB=GeoLite2-City.mmdb ./result/bin/geode
+Running geode...
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+```
+
+### Using Cabal
+
+To use Cabal directly (without Nix), first initialize and build:
 
 ```
 $ cabal sandbox init
 $ cabal install -j --only-dependencies
 ```
 
-## Usage
-
-Fire up Geode:
+Then run with Cabal:
 
 ```
 $ GEOIP_DB=GeoLite2-City.mmdb cabal run
 Running geode...
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 ```
+
+## Usage
 
 Try it out:
 
