@@ -53,7 +53,7 @@ Setting phasers to stun... (port 3000) (ctrl-c to quit)
 Try it out:
 
 ```
-$ curl localhost:3001/34.213.34.148
+$ curl localhost:3000/34.213.34.148
 {
     "city": "Boardman",
     "continent": "North America",
