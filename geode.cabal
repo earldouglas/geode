@@ -26,6 +26,7 @@ executable geode
   build-depends:     base
                      , scotty
                      , aeson
+                     , aeson-pretty
                      , geoip2 >= 0.3.0.0
                      , iproute
                      , http-types

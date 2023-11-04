@@ -2,6 +2,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 
 import Data.Aeson (ToJSON, toJSON, (.=), object)
+import Data.Aeson.Encode.Pretty (encodePretty)
 import Data.GeoIP2
 import Data.IP (fromHostAddress)
 import Data.IP (IP(..))
@@ -9,7 +10,7 @@ import Data.Maybe (listToMaybe)
 import Network.HTTP.Types (status404)
 import Network.Socket (SockAddr (SockAddrInet))
 import Network.Wai (remoteHost)
-import Web.Scotty (get, json, scotty, header, status, text, ActionM, request, param, file, setHeader, middleware)
+import Web.Scotty (get, raw, scotty, header, status, text, ActionM, request, param, file, setHeader, middleware)
 import Network.Wai.Middleware.Cors (simpleCors)
 import System.Environment (getEnv)
 import Text.Read (readMaybe)
@@ -47,13 +48,19 @@ nope e = do
   status status404
   text $ TL.pack e
 
+-- Pretty version of `Web.Scotty (json)`, which calls `ToJSON (encode)`
+jsonPretty :: (ToJSON a) => a -> ActionM ()
+jsonPretty x = do
+  setHeader "Content-Type" "application/json; charset=utf-8"
+  raw $ encodePretty x
+
 service :: GeoDB -> Maybe IP -> ActionM ()
 service _ Nothing = nope "Couldn't figure out your IP address."
 service geodb (Just ip) = do
   let geoResult = findGeoData geodb "en" ip
   case geoResult of
     Left e -> nope e
-    Right x -> json (Result x)
+    Right x -> jsonPretty (Result x)
 
 main :: IO ()
 main = do
