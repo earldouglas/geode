@@ -9,8 +9,8 @@ Purchase a [*GeoIP2 City* database][geoip2-city], or grab a free
 [*GeoLite2 City* database][geolite2] from MaxMind:
 
 ```
-$ curl -s http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz | \
-  gunzip > GeoLite2-City.mmdb
+$ curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=<LICENSE_KEY>&suffix=tar.gz" | \
+  tar -xz
 ```
 
 ## Build and Run
