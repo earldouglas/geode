@@ -58,8 +58,9 @@ service geodb (Just ip) = do
 main :: IO ()
 main = do
   dbname <- getEnv "GEOIP_DB"
+  port <- read <$> getEnv "PORT"
   geodb <- openGeoDB dbname
-  scotty 3000 $ do
+  scotty port $ do
     middleware simpleCors
     get "/" $ do
       ipM <- findIp
