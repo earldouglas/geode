@@ -53,18 +53,18 @@ Setting phasers to stun... (port 3000) (ctrl-c to quit)
 Try it out:
 
 ```
-$ curl -s localhost:3000/8.8.8.8
+$ curl localhost:3001/34.213.34.148
 {
-  "regionName": "California",
-  "latitude": 37.386,
-  "postalCode": "94035",
-  "city": "Mountain View",
-  "countryName": "United States",
-  "countryCode": "US",
-  "region": "CA",
-  "longitude": -122.0838,
-  "continentCode": "NA",
-  "continent": "North America"
+    "city": "Boardman",
+    "continent": "North America",
+    "continentCode": "NA",
+    "countryCode": "US",
+    "countryName": "United States",
+    "latitude": 45.8491,
+    "longitude": -119.7143,
+    "postalCode": "97818",
+    "region": "OR",
+    "regionName": "Oregon"
 }
 ```
 
