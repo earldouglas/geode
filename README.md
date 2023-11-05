@@ -13,11 +13,9 @@ $ curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-C
   tar -xz
 ```
 
-## Build and Run
+## Build, test, and Run
 
-### Using Nix
-
-To use Nix, first build:
+Use Nix to build and test:
 
 ```
 $ nix-build
@@ -27,23 +25,6 @@ Then run the compiled binary:
 
 ```
 $ GEOIP_DB=GeoLite2-City.mmdb PORT=3000 ./result/bin/geode
-Running geode...
-Setting phasers to stun... (port 3000) (ctrl-c to quit)
-```
-
-### Using Cabal
-
-To use Cabal directly (without Nix), first initialize and build:
-
-```
-$ cabal sandbox init
-$ cabal install -j --only-dependencies
-```
-
-Then run with Cabal:
-
-```
-$ GEOIP_DB=GeoLite2-City.mmdb PORT=3000 cabal run
 Running geode...
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 ```
@@ -69,8 +50,8 @@ $ curl localhost:3000/34.213.34.148
 ```
 
 If you make a request to `/` (leaving off any IP address) Geode will
-look up your IP address, checking for any `X-Forwarded-For` header, then
-falling back to the socket address of your client.
+look up your IP address by checking for any `X-Forwarded-For` header
+then falling back to the socket address of your client.
 
 [maxmind]: https://www.maxmind.com/
 [geoip2-city]: https://www.maxmind.com/en/geoip2-city

@@ -19,11 +19,12 @@ category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
 
-executable geode
-  ghc-options:       -Wall
-  main-is:           Main.hs
-  default-language:  Haskell2010
-  build-depends:     base
+library
+  hs-source-dirs:      src
+  exposed-modules:     Geode
+  ghc-options:         -Wall
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
                      , scotty
                      , aeson
                      , aeson-pretty
@@ -35,3 +36,27 @@ executable geode
                      , network
                      , exceptions
                      , wai-cors
+
+executable geode-exe
+  hs-source-dirs:      app
+  main-is:             Main.hs
+  ghc-options:         -Wall
+  default-language:    Haskell2010
+  build-depends:       base
+                     , geode
+
+test-suite tests
+  type:                exitcode-stdio-1.0
+  main-is:             Spec.hs
+  hs-source-dirs:      test
+  default-language:    Haskell2010
+  build-depends:       base
+                     , geode
+                     , hspec
+                     , hspec-wai
+                     , hspec-wai-json
+                     , http-types
+                     , geoip2 >= 0.3.0.0
+                     , iproute
+                     , case-insensitive
+                     , text
