@@ -37,7 +37,7 @@ library
                      , exceptions
                      , wai-cors
 
-executable geode-exe
+executable geode
   hs-source-dirs:      app
   main-is:             Main.hs
   ghc-options:         -Wall
