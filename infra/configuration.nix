@@ -25,8 +25,8 @@ in {
         import (pkgs.fetchFromGitHub {
           owner = "earldouglas";
           repo = "geode";
-          rev = "c7a5cf704d016d45f502d4bad622c649585290c0";
-          sha256 = "1jzv0cbq3ids0m7mx3x0m4rqq210bf3q7nz54v7mrnq2hi07np4v";
+          rev = "6512238b951680e055b0bd57a8da7f07f09afab9";
+          sha256 = "08j6wa8ja7m5m7ka7h5j4mdk6vwwlcngwg2l5cp4gdm00qc5h8dm";
         });
 
       geoIpKey = builtins.getEnv "GEOIP_KEY";
