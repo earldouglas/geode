@@ -1,11 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveGeneric #-}
 
 import Data.Aeson (ToJSON, toJSON, (.=), object)
 import Data.Aeson.Encode.Pretty (encodePretty)
 import Data.GeoIP2
-import Data.IP (fromHostAddress)
-import Data.IP (IP(..))
+import Data.IP (fromHostAddress, IP(..))
 import Data.Maybe (listToMaybe)
 import Network.HTTP.Types (status404)
 import Network.Socket (SockAddr (SockAddrInet))
@@ -19,17 +17,18 @@ import qualified Data.Text.Lazy as TL
 newtype Result = Result GeoResult
 
 instance ToJSON Result where
-  toJSON (Result x) = object [ "city"          .= geoCity x
-                             , "continentCode" .= geoContinentCode x
-                             , "continent"     .= geoContinent x
-                             , "countryCode"   .= geoCountryISO x
-                             , "countryName"   .= geoCountry x
-                             , "latitude"      .= (locationLatitude <$> geoLocation x)
-                             , "longitude"     .= (locationLongitude <$> geoLocation x)
-                             , "postalCode"    .= geoPostalCode x
-                             , "region"        .= (fst <$> (listToMaybe $ geoSubdivisions x))
-                             , "regionName"    .= (snd <$> (listToMaybe $ geoSubdivisions x))
-                             ]
+  toJSON (Result x) =
+    object [ "city"          .= geoCity x
+           , "continentCode" .= geoContinentCode x
+           , "continent"     .= geoContinent x
+           , "countryCode"   .= geoCountryISO x
+           , "countryName"   .= geoCountry x
+           , "latitude"      .= (locationLatitude <$> geoLocation x)
+           , "longitude"     .= (locationLongitude <$> geoLocation x)
+           , "postalCode"    .= geoPostalCode x
+           , "region"        .= (fst <$> listToMaybe (geoSubdivisions x))
+           , "regionName"    .= (snd <$> listToMaybe (geoSubdivisions x))
+           ]
 
 findIp :: ActionM (Maybe IP)
 findIp = do
