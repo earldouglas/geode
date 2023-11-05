@@ -75,7 +75,7 @@ in {
 
       # Security #######################################################
       services.fail2ban.enable = true;
-      networking.firewall.allowedTCPPorts = [ 22 3000 ];
+      networking.firewall.allowedTCPPorts = [ 22 80 443 ];
 
       # Service ########################################################
       users.groups.geode = {};
@@ -100,5 +100,35 @@ in {
           PORT = "3000";
         };
       };
+
+      security.acme.defaults.email = "james@earldouglas.com";
+      security.acme.acceptTerms = true;
+
+      services.nginx = {
+        enable = true;
+        recommendedGzipSettings = true;
+        commonHttpConfig = ''
+          charset utf-8;
+          log_format postdata '$time_local\t$remote_addr\t$request_body';
+          limit_req_zone $binary_remote_addr zone=ip:10m rate=1r/s;
+          add_header Permissions-Policy "interest-cohort=()";
+          add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+        '';
+        virtualHosts = {
+          "geode.earldouglas.com" = {
+            enableACME = true;
+            onlySSL = false; # preferred for securitah
+            forceSSL = true; # needed for acme?
+            locations = {
+              "/".extraConfig = ''
+                limit_req zone=ip;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_pass http://localhost:3000;
+              '';
+            };
+          };
+        };
+      };
     };
+
 }
