@@ -5,15 +5,15 @@ City][geoip2-city] database.
 
 ## Setup
 
-Purchase a [*GeoIP2 City* database][geoip2-city], or grab a free
-[*GeoLite2 City* database][geolite2] from MaxMind:
+Purchase a [*GeoIP2 City*][geoip2-city] database, or grab a free
+[*GeoLite2 City*][geolite2] database from MaxMind:
 
 ```
 $ curl -s "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=<LICENSE_KEY>&suffix=tar.gz" | \
   tar -xz
 ```
 
-## Build, test, and Run
+## Build, test, and run
 
 Use Nix to build and test:
 
