@@ -35,7 +35,7 @@ in {
         name = "database";
         src = pkgs.fetchurl {
           url = "https://download.maxmind.com/app/geoip_download?edition_id=GeoLite2-City&license_key=${geoIpKey}&suffix=tar.gz";
-          hash = "sha256-UcAR66XF/8Cnz6ETMlDtJcQCKCPFwwWQN66+rwRpqi0=";
+          hash = "sha256-XPdyvucYOr3FaSvOpUB13a3PY8mi0PFK/KqSXn6Rhao=";
         };
         phases = [ "installPhase" ];
         installPhase = ''
